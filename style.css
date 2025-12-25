@@ -1,0 +1,80 @@
+body{
+  background-color: #333;
+}
+
+.head{
+  color: white;
+  font-size: 40px;
+  font-weight: bolder;
+  background: -webkit-linear-gradient(#e6b0b0, #0f9bf8);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+
+.draggable {
+  cursor: grab;
+}
+
+.card.draggable {
+  margin-bottom: 0.75rem;
+  border: none;
+  border-radius: 0.5rem;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+  transition: all 0.2s ease;
+}
+
+.card.draggable:hover {
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  transform: translateY(-2px);
+}
+
+.select-compact {
+  height: 1.6rem !important;
+  font-size: 0.75rem !important;
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+}
+
+.draggable.dragging {
+  opacity: 0.5;
+  border: 2px dashed #000;
+}
+
+.kanban-column {
+  min-height: 150px;
+  transition: background-color 0.2s;
+}
+
+.kanban-column.drag-over {
+  background-color: #f0f0f0;
+  border: 2px dashed #333;
+}
+
+.status-bar{
+  background-color: #0dcaf0;
+  width: 100%;
+  /* margin-left: 110px; */
+
+}
+
+
+#inprogress .card {
+  border-left: 5px solid #ffc107;
+  border-top: 5px solid #ffc107;
+}
+
+#done .card {
+  border-left: 5px solid #198754;
+  border-top: 5px solid #198754;
+}
+
+#qa .card {
+  border-left: 5px solid #0dcaf0;
+  border-top: 5px solid #0dcaf0;
+}
+
+#deploy .card {
+  border-left: 5px solid #0d6efd;
+  border-top: 5px solid #0d6efd;
+}

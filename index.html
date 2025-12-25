@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>KanBan Board</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+  <div class="container-fulid">
+    <div class="row g-2 mt-3">
+      <div class="head text-center mb-3">KanBan Board</div>
+      <div class="row container ms-2 gap-2 mb-2 d-flex justify-content-evenly status-bar">
+        <span class="col-2">InProgress</span>
+        <span class="col-2">Done</span>
+        <span class="col-2">QA</span>
+        <span class="col-2">Deploy</span>
+      </div>
+      <!-- <div class="row container d-flex justify-content-center min-vh-100 w-100 gap-3">
+          <div class="col-3 border">
+            <head>
+              Task:
+            </head>
+            <p>Learn Jquery Fast</p>
+            <div class="status-bar">
+              <span>status</span>
+              <select>
+                <option value="pending">pending</option>
+                <option value="inprogress">Inprogress</option>
+                <option value="Done">Done</option>
+              </select>
+            </div>
+          </div>
+          <div class="col-3 border">
+            <head>
+              Task:
+            </head>
+            <p>Learn Jquery Fast</p>
+            <div class="status-bar">
+              <span>status</span>
+              <select>
+                <option value="pending">pending</option>
+                <option value="inprogress">Inprogress</option>
+                <option value="Done">Done</option>
+              </select>
+            </div>
+          </div>
+          <div class="col-3 border">
+            <head>
+              Task:
+            </head>
+            <p>Learn Jquery Fast</p>
+            <div class="status-bar">
+              <span>status</span>
+              <select>
+                <option value="pending">pending</option>
+                <option value="inprogress">Inprogress</option>
+                <option value="Done">Done</option>
+              </select>
+            </div>
+          </div>
+          <div class="col-3 border">
+            <head>
+              Task:
+            </head>
+            <p>Learn Jquery Fast</p>
+            <div class="status-bar">
+              <span>status</span>
+              <select>
+                <option value="pending">pending</option>
+                <option value="inprogress">Inprogress</option>
+                <option value="Done">Done</option>
+              </select>
+            </div>
+          </div>
+        </div> -->
+
+      <div class="container">
+        <div class="row g-3 min-vh-100">
+          <div class="col-3 border kanban-column" id="inprogress">
+            <div class="card m-3 draggable" draggable="true" style="width: 18rem">
+              <div class="card-body">
+                <div class="d-flex justify-content-between align-items-center mb-2">
+                  <h6 class="card-title mb-0">Learn Jquery</h6>
+                  <select class="form-select form-select-sm w-auto py-0 border-secondary-subtle select-compact">
+                    <option value="inprogress" selected>Pending</option>
+                    <option value="done">Done</option>
+                    <option value="qa">QA</option>
+                    <option value="deploy">Deploy</option>
+                  </select>
+                </div>
+                <p class="card-text small text-secondary mb-3">
+                  Quickly learn the basics of jQuery to improve DOM
+                  manipulation skills.
+                </p>
+                <div class="d-flex justify-content-between">
+                  <small class="text-muted">Assigned to: </small>
+                  <span>
+                    <h6>Ali Raza</h6>
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-3 border kanban-column" id="done">
+            <div class="card m-3 draggable" draggable="true" style="width: 18rem">
+              <div class="card-body">
+                <div class="d-flex justify-content-between align-items-center mb-2">
+                  <h6 class="card-title mb-0">Learn Jquery</h6>
+                  <select
+                    class="form-select form-select-sm w-auto py-0 shadow-none border-secondary-subtle select-compact">
+                    <option value="inprogress">Pending</option>
+                    <option value="done" selected>Done</option>
+                    <option value="qa">QA</option>
+                    <option value="deploy">Deploy</option>
+                  </select>
+                </div>
+                <p class="card-text small text-secondary mb-3">
+                  Quickly learn the basics of jQuery to improve DOM
+                  manipulation skills.
+                </p>
+                <div class="d-flex justify-content-between">
+                  <small class="text-muted">Assigned to: </small>
+                  <span>
+                    <h6>Ali Raza</h6>
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-3 border kanban-column" id="qa">
+            <div class="card m-3 draggable" draggable="true" style="width: 18rem">
+              <div class="card-body">
+                <div class="d-flex justify-content-between align-items-center mb-2">
+                  <h6 class="card-title mb-0">Learn Jquery</h6>
+                  <select
+                    class="form-select form-select-sm w-auto py-0 shadow-none border-secondary-subtle select-compact">
+                    <option value="inprogress">Pending</option>
+                    <option value="done">Done</option>
+                    <option value="qa" selected>QA</option>
+                    <option value="deploy">Deploy</option>
+                  </select>
+                </div>
+                <p class="card-text small text-secondary mb-3">
+                  Quickly learn the basics of jQuery to improve DOM
+                  manipulation skills.
+                </p>
+                <div class="d-flex justify-content-between">
+                  <small class="text-muted">Assigned to: </small>
+                  <span>
+                    <h6>Raza</h6>
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-3 border kanban-column" id="deploy">
+            <div class="card m-3 draggable" draggable="true" style="width: 18rem">
+              <div class="card-body">
+                <div class="d-flex justify-content-between align-items-center mb-2">
+                  <h6 class="card-title mb-0">Learn Jquery</h6>
+                  <select
+                    class="form-select form-select-sm w-auto py-0 shadow-none border-secondary-subtle select-compact">
+                    <option value="inprogress">Pending</option>
+                    <option value="done">Done</option>
+                    <option value="qa">QA</option>
+                    <option value="deploy" selected>Deploy</option>
+                  </select>
+                </div>
+                <p class="card-text small text-secondary mb-3">
+                  Quickly learn the basics of jQuery to improve DOM
+                  manipulation skills.
+                </p>
+                <div class="d-flex justify-content-between">
+                  <small class="text-muted">Assigned to: </small>
+                  <span>
+                    <h6>Abbas</h6>
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+<script src="script.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+  integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+
+</html>
