@@ -17,6 +17,7 @@ body{
 }
 
 .card.draggable {
+  width: 100%;
   margin-bottom: 0.75rem;
   border: none;
   border-radius: 0.5rem;
