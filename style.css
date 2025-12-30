@@ -37,20 +37,20 @@ body{
   padding-bottom: 0 !important;
 }
 
-.draggable.dragging {
+/* .draggable.dragging {
   opacity: 0.5;
   border: 2px dashed #000;
-}
+} */
 
 .kanban-column {
   min-height: 150px;
   transition: background-color 0.2s;
 }
-
+/* 
 .kanban-column.drag-over {
   background-color: #f0f0f0;
   border: 2px dashed #333;
-}
+} */
 
 .status-bar{
   background-color: #0dcaf0;

@@ -95,7 +95,6 @@ function updateCard(card, title, desc, assigned, status) {
   }
 }
 
-
 function addEditEvent(card) {
   const editBtn = card.querySelector('.edit-btn');
   editBtn.addEventListener('click', (e) => {
@@ -191,9 +190,9 @@ function saveData() {
 
     cards.forEach(card => {
       data.push({
-        title: card.querySelector('.card-title').innerText,
-        desc: card.querySelector('.description-text').innerText,
-        assigned: card.querySelector('.assigned-text').innerText,
+        title: card.getElementsByClassName('.card-title').innerText,
+        desc: card.getElementsByClassName('.description-text').innerText,
+        assigned: card.getElementsByClassName('.assigned-text').innerText,
         status: colId
       });
     });
