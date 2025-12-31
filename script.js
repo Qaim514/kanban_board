@@ -15,6 +15,27 @@ if (addTaskBtn) {
     document.getElementById('exampleModalLabel').innerText = 'Add New Task';
     document.getElementById('saveTaskBtn').innerText = 'Save Task';
   });
+
+}
+
+
+// Variables for Delete Modal
+let cardToDelete = null;
+const confirmDeleteBtn = document.getElementById('confirmDeleteBtn');
+
+if (confirmDeleteBtn) {
+  confirmDeleteBtn.addEventListener('click', () => {
+    if (cardToDelete) {
+      cardToDelete.remove();
+      cardToDelete.remove();
+      saveData();
+      toggleEmptyState(); // Update UI state
+      cardToDelete = null;
+
+      const modal = bootstrap.Modal.getInstance(document.getElementById('delete-alert'));
+      if (modal) modal.hide();
+    }
+  });
 }
 
 if (saveTaskBtn) {
@@ -36,6 +57,7 @@ if (saveTaskBtn) {
     }
 
     saveData();
+    toggleEmptyState(); // Update UI state
     const modal = bootstrap.Modal.getInstance(document.getElementById('exampleModal'));
     modal.hide();
     document.getElementById('addTaskForm').reset();
@@ -45,7 +67,7 @@ if (saveTaskBtn) {
 
 function createCard(title, desc, assigned, status) {
   const newCard = document.createElement('div');
-  newCard.className = 'card m-2 draggable';
+  newCard.className = 'card draggable';
   newCard.draggable = true;
 
   newCard.innerHTML = `
@@ -59,19 +81,25 @@ function createCard(title, desc, assigned, status) {
                 <option value="qa" ${status === 'qa' ? 'selected' : ''}>QA</option>
                 <option value="deploy" ${status === 'deploy' ? 'selected' : ''}>Deploy</option>
                 </select>
-                <button class="btn btn-sm btn-link text-decoration-none p-0 edit-btn">Edit</button>
+                <button class="btn btn-sm btn-link text-decoration-none p-0 edit-btn"   ><i class="fa-regular fa-pen-to-square"></i></button>
                 </div>
             </div>
             <p class="card-text small text-secondary mb-3 description-text">${desc}</p>
-            <div class="d-flex justify-content-between">
-                <small class="text-muted">Assigned to: </small>
-                <span><h6 class="assigned-text mb-0">${assigned}</h6></span>
-            </div>
+            <div class="d-flex justify-content-between align-items-center w-100">
+                <div class="d-flex">
+                  <small class="text-muted">Assigned to:</small>
+                  <span><h6 class="assigned-text mb-0 ms-1">${assigned}</h6></span>
+                </div>
+              <div class="d-flex align-items-center gap-2">
+                <button class="btn btn-sm btn-link text-danger text-decoration-none p-0 delete-btn">Delete</button>
+              </div>
+            </div>      
         </div>
     `;
 
   addDragEvents(newCard);
   addEditEvent(newCard);
+  addDeleteEvent(newCard)
 
   const targetColumn = document.getElementById(status);
   if (targetColumn) {
@@ -81,10 +109,15 @@ function createCard(title, desc, assigned, status) {
 
 function updateCard(card, title, desc, assigned, status) {
 
-  card.querySelector('.card-title').innerText = title;
-  card.querySelector('.description-text').innerText = desc;
-  card.querySelector('.assigned-text').innerText = assigned;
-  card.querySelector('select').value = status;
+  const cardTitle = card.querySelector('.card-title');
+  const cardDesc = card.querySelector('.description-text');
+  const cardAssigned = card.querySelector('.assigned-text');
+  const cardSelect = card.querySelector('select');
+
+  if (cardTitle) cardTitle.innerText = title;
+  if (cardDesc) cardDesc.innerText = desc;
+  if (cardAssigned) cardAssigned.innerText = assigned;
+  if (cardSelect) cardSelect.value = status;
 
   const currentColumnId = card.parentElement.id;
   if (currentColumnId !== status) {
@@ -97,6 +130,8 @@ function updateCard(card, title, desc, assigned, status) {
 
 function addEditEvent(card) {
   const editBtn = card.querySelector('.edit-btn');
+  if (!editBtn) return;
+
   editBtn.addEventListener('click', (e) => {
     e.stopPropagation();
 
@@ -111,6 +146,22 @@ function addEditEvent(card) {
     document.getElementById('saveTaskBtn').innerText = 'Update Task';
 
     const modal = new bootstrap.Modal(document.getElementById('exampleModal'));
+    modal.show();
+  });
+}
+
+
+
+function addDeleteEvent(card) {
+  const deleteBtn = card.querySelector('.delete-btn');
+  if (!deleteBtn) return;
+
+  deleteBtn.addEventListener('click', (e) => {
+    e.stopPropagation();
+
+    cardToDelete = card; // Set the card we want to delete
+
+    const modal = new bootstrap.Modal(document.getElementById('delete-alert'));
     modal.show();
   });
 }
@@ -147,10 +198,12 @@ columns.forEach(column => {
     const afterElement = getAfterElement(column, e.clientY);
     const draggable = document.querySelector('.dragging');
 
-    if (afterElement == null) {
-      column.appendChild(draggable);
-    } else {
-      column.insertBefore(draggable, afterElement);
+    if (draggable) {
+      if (afterElement == null) {
+        column.appendChild(draggable);
+      } else {
+        column.insertBefore(draggable, afterElement);
+      }
     }
   });
 
@@ -190,9 +243,9 @@ function saveData() {
 
     cards.forEach(card => {
       data.push({
-        title: card.getElementsByClassName('.card-title').innerText,
-        desc: card.getElementsByClassName('.description-text').innerText,
-        assigned: card.getElementsByClassName('.assigned-text').innerText,
+        title: card.querySelector('.card-title')?.innerText || '',
+        desc: card.querySelector('.description-text')?.innerText || '',
+        assigned: card.querySelector('.assigned-text')?.innerText || '',
         status: colId
       });
     });
@@ -214,5 +267,22 @@ function loadData() {
     tasks.forEach(task => {
       createCard(task.title, task.desc, task.assigned, task.status);
     });
+    toggleEmptyState();
+  } else {
+    toggleEmptyState(); // Show empty state if no data
+  }
+}
+
+function toggleEmptyState() {
+  const allCards = document.querySelectorAll('.card.draggable');
+  const noTaskScreen = document.getElementById('no-task-screen');
+  const board = document.getElementById('kanban-board');
+
+  if (allCards.length === 0) {
+    if (noTaskScreen) noTaskScreen.classList.remove('d-none');
+    if (board) board.classList.add('d-none');
+  } else {
+    if (noTaskScreen) noTaskScreen.classList.add('d-none');
+    if (board) board.classList.remove('d-none');
   }
 }
