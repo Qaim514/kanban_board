@@ -91,7 +91,7 @@ function createCard(title, desc, assigned, status) {
                   <span><h6 class="assigned-text mb-0 ms-1">${assigned}</h6></span>
                 </div>
               <div class="d-flex align-items-center gap-2">
-                <button class="btn btn-sm btn-link text-danger text-decoration-none p-0 delete-btn">Delete</button>
+                <button class="btn btn-sm btn-link text-danger text-decoration-none p-0 delete-btn"><i class="fa-regular fa-trash-can"></i></button>
               </div>
             </div>      
         </div>
